@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Contoh Validasi Form</title>
+    <script>
+      function validateForm() {
+        // Ambil nilai dari field
+        var nama = document.forms["myForm"]["nama"].value;
+        var usia = document.forms["myForm"]["usia"].value;
+
+        // 1. Validasi Nama (Tidak boleh kosong)
+        if (nama == "") {
+          alert("Nama harus diisi.");
+          document.forms["myForm"]["nama"].focus(); // Fokus ke field nama
+          return false; // Menghentikan submit form
+        }
+
+        // 2. Validasi Usia (Tidak boleh kosong)
+        if (usia == "") {
+          alert("Usia harus diisi.");
+          document.forms["myForm"]["usia"].focus(); // Fokus ke field usia
+          return false;
+        }
+
+        // 3. Validasi Usia (Harus berupa angka)
+        // isNaN (Is Not a Number) akan mengembalikan true jika usia BUKAN angka
+        if (isNaN(usia)) {
+          alert("Usia harus berupa angka.");
+          document.forms["myForm"]["usia"].focus();
+          return false;
+        }
+
+        // Jika semua validasi lolos
+        alert("Form berhasil divalidasi dan siap untuk disubmit!");
+        return true;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Form Pendaftaran</h1>
+
+    <form
+      name="myForm"
+      action="/submit-data"
+      onsubmit="return validateForm()"
+      method="post"
+    >
+      <label for="nama">Nama:</label><br />
+      <input type="text" id="nama" name="nama" /><br /><br />
+
+      <label for="usia">Usia:</label><br />
+      <input type="text" id="usia" name="usia" /><br /><br />
+
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>
